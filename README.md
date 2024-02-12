@@ -1,10 +1,15 @@
 # rupilot.nvim
-This is a minimal battle-used vim plugin to work with Rupilot.
-Plugin is based on nui (modern UI toolkit) and lua only approach for making a nvim plugin.
 
-## Installation
+## Установка
 
-Install using lazy.nvim. Note that [nui.nvim](https://github.com/MunifTanjim/nui.nvim) is a requirement.
+Вам надо установить RUPILOT_KEY в ваши переменные окружения env. 
+Например:
+Можно добавить `export RUPILOT_KEY=` в ваш .bashrc или .zshrc. Не забудьте применить изменения - `source ~/.zshrc`
+Переменые окружения может быть установлена как это устроено в вашей ОС.
+Если у вас нету RUPILOT_KEY, надо посетить https://rupilot.ru и создать новый ключ после регистрации.
+
+
+Установка с помощью lazy.nvim. [nui.nvim](https://github.com/MunifTanjim/nui.nvim) это обязательная библиотека для работы rupilot.nvim.
 
 ```lua
 -- rupilot.nvim
@@ -13,8 +18,15 @@ Install using lazy.nvim. Note that [nui.nvim](https://github.com/MunifTanjim/nui
 }
 ```
 
-## Usage
+## Как пользоваться?
 
-Run `:Rupilot` without any arguments to get a search prompt 
+Запустить команду `:Rupilot` без аргументов для запуска окна ввода вопросов для rupilot
+или сразу напишите вам вопрос к Rupilot в строчку аргументами: `:Rupilot python torch create a tensor scalar`
 
-or with an argument to search for a term: `:Rupilot python torch create a tensor scalar`
+---
+Шоткаты:
+
+ - Открыть окно ввода вопросов - `<leader>aa`
+
+ - Выделите любой блок кода и нажмите - `<leader>ae`
+Откроется форма для ввода вопроса, в котором можно указать вопрос относительно выделенного блока кода.
