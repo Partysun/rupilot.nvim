@@ -9,13 +9,18 @@ You can add `export RUPILOT_KEY=` to your .bashrc or .zshrc. And don't forget ap
 For you OS it's all up to you how to do it.
 If you don't have RUPILOT_KEY, you should visit https://rupilot.ru and create a new one.
 
+Also RUPILOT_KEY can be saved in a config file: $HOME/.config/rupilot.conf
+
 Install using lazy.nvim. Note that [nui.nvim](https://github.com/MunifTanjim/nui.nvim) is a requirement.
 
 ```lua
 -- rupilot.nvim
 {
-  'Partysun/rupilot.nvim', dependencies = { "MunifTanjim/nui.nvim" }
+  'Partysun/rupilot.nvim',
+  dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" }
 }
+
+More info here -> [https://rupilot.ru/docs](https://rupilot.ru/docs)
 ```
 
 ## Usage
