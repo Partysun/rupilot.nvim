@@ -2,15 +2,38 @@ local curl = require("plenary.curl")
 local Input = require("nui.input")
 local Popup = require("nui.popup")
 local event = require("nui.utils.autocmd").event
+local notify = require("notify")
+local io = require("io")
 
-RUPILOT_KEY = os.getenv("RUPILOT_KEY") -- get API key from environment variable
+local function read_config_from_file(file_path)
+	local config_file, err = io.open(file_path, "r")
+	if config_file then
+		local content = config_file:read("*all")
+		t = {}
+		for k, v in string.gmatch(content, "(%w+)=(%w+)") do
+			t[k] = v
+		end
+		config_file:close()
+		return t.KEY
+	end
+end
+
+-- depreceted path
+local config_deprecated = os.getenv("HOME") .. "/.taz" -- replace with your actual path
+local config_new = os.getenv("HOME") .. "/.config/rupilot.conf" -- replace with your actual path
+
+RUPILOT_KEY = os.getenv("RUPILOT_KEY")
+	or read_config_from_file(config_new)
+	or os.getenv("TAZ_KEY") -- get API key from environment variable
+	or read_config_from_file(config_deprecated)
+
 if not RUPILOT_KEY then
-	error("No API key found")
+	notify("No API key found. --> https://rupilot.ru/docs", "error", { title = "Rupilot" })
 end
 
 local function fetch_api(search_query, callback)
 	local json = { query = search_query, locale = "en" }
-	-- how to get api key from config of vim plugin using lazy.nvim
+
 	local headers = {
 		["content-type"] = "application/json",
 		["Authorization"] = "Bearer sk-" .. RUPILOT_KEY,
@@ -19,7 +42,6 @@ local function fetch_api(search_query, callback)
 
 	assert(res.exit == 0 and res.status < 400 and res.status >= 200, "Failed to fetch Rupilot API")
 	local body = vim.fn.json_decode(res.body)
-	--print("Debug Variable Value: " .. vim.inspect(body))
 	if body ~= nil then
 		vim.schedule(function()
 			callback(body.query)

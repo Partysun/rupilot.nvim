@@ -10,8 +10,15 @@
 Например:
 Можно добавить `export RUPILOT_KEY=` в ваш .bashrc или .zshrc. Не забудьте применить изменения - `source ~/.zshrc`
 
+Но лучше создать файл ~/.config/rupilot.conf
+И добавить туда ваш ключ:
+```
+RUPILOT_KEY={Ваш ключ}
+```
+
 Переменые окружения может быть установлена как это устроено в вашей ОС.
 Если у вас нету RUPILOT_KEY, надо посетить https://rupilot.ru и создать новый ключ после регистрации.
+Подробней на [https://rupilot.ru/docs](https://rupilot.ru/docs)
 
 
 Установка с помощью lazy.nvim. [nui.nvim](https://github.com/MunifTanjim/nui.nvim) это обязательная библиотека для работы rupilot.nvim.
@@ -19,7 +26,8 @@
 ```lua
 -- rupilot.nvim
 {
-  'Partysun/rupilot.nvim', dependencies = { "MunifTanjim/nui.nvim" }
+  'Partysun/rupilot.nvim',
+  dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" }
 }
 ```
 
